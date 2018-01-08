@@ -5,6 +5,7 @@ import java8.data.Data;
 import java8.data.Person;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,7 +23,13 @@ public class Lambda_02_Test {
     // tag::map[]
     private List<Account> map(List<Person> personList, PersonToAccountMapper mapper) {
         // TODO implémenter la méthode pour transformer une liste de personnes en liste de comptes
-        return null;
+    	List<Account> accounts=new ArrayList<Account>();
+    	for(Person person:personList)
+    	{
+    		Account account=mapper.map(person);
+    		accounts.add(account);
+    	}
+    	return accounts;
     }
     // end::map[]
 
@@ -35,7 +42,13 @@ public class Lambda_02_Test {
 
         // TODO transformer la liste de personnes en liste de comptes
         // TODO tous les objets comptes ont un solde à 100 par défaut
-        List<Account> result = map(personList, null);
+        PersonToAccountMapper mapper=p->{
+        	Account account=new Account();
+        	account.setBalance(100);
+        	account.setOwner(p);
+			return account;
+        };
+        List<Account> result = map(personList, mapper);
 
         assert result.size() == personList.size();
         for (Account account : result) {
@@ -52,12 +65,17 @@ public class Lambda_02_Test {
         List<Person> personList = Data.buildPersonList(100);
 
         // TODO transformer la liste de personnes en liste de prénoms
-        List<String> result = null;
+        List<String> result = new ArrayList<String>();
 
+        for(Person person:personList) {
+        	result.add(person.getFirstname());
+        }
+        
         assert result.size() == personList.size();
         for (String firstname : result) {
             assert firstname.startsWith("first");
         }
+        
     }
     // end::test_map_person_to_firstname[]
 }

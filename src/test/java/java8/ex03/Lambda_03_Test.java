@@ -1,10 +1,12 @@
 package java8.ex03;
 
-import java8.data.Data;
-import java8.data.Person;
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
+import java8.data.Data;
+import java8.data.Person;
 
 /**
  * Exercice 03 - ForEach
@@ -20,6 +22,10 @@ public class Lambda_03_Test {
     // tag::forEach[]
     private void forEach(List<Person> source, PersonProcessor processor) {
        // TOD0
+    	for(Person person:source) {
+    		//System.out.println(person.getLastname());
+    		processor.process(person);
+    	}
     }
     // end::forEach[]
 
@@ -34,7 +40,13 @@ public class Lambda_03_Test {
         // TODO vérifier qu'une personne à un nom qui commence par last
         // TODO vérifier qu'une personne à un age > 0
         // TODO la vérification se fait via une assertion (mot clé assert)
-        PersonProcessor verifyPerson = null;
+        PersonProcessor verifyPerson =person->{
+        	String patternPrenom="first";
+        	String patternNom="last";
+        	Assert.assertTrue("Verification du prenom.",person.getFirstname().startsWith(patternPrenom));
+        	Assert.assertTrue("Verification du nom.",person.getLastname().startsWith(patternNom));
+        	assert person.getAge()>0;
+        };
 
         assert verifyPerson != null;
 

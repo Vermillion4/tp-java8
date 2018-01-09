@@ -18,13 +18,15 @@ public class DateAndTime_01_Test {
     public void test_date() {
 
         // TODO modifier les paramètres pour que le test soit passant
-        Date date = new Date(0, 0, 0, 0,0,0);
+    	//Depart de 1900.
+        @SuppressWarnings("deprecation")
+		Date date = new Date(117, 2, 24, 1,2,3);
 
         assertThat(date.toString(), is("Fri Mar 24 01:02:03 CET 2017"));
 
         // une date est mutable... :-(
         // TODO modifier le jour de la date pour que le test soit passant
-
+        date = new Date(117, 2, 25, 1,2,3);
         assertThat(date.toString(), is("Sat Mar 25 01:02:03 CET 2017"));
     }
 
@@ -35,12 +37,12 @@ public class DateAndTime_01_Test {
         Calendar calendar = Calendar.getInstance();
 
         // TODO modifier l'objet calendar pour que le test soit passant
-
+        calendar.setTime(new Date(117, 2, 24, 1,2,3));
         assertThat(calendar.getTime().toString(), is("Fri Mar 24 01:02:03 CET 2017"));
 
         // calendar est mutable... :-(
         // TODO modifier l'objet calendar pour que le test soit passant
-
+        calendar.add(Calendar.DAY_OF_WEEK, 1);
         assertThat(calendar.getTime().toString(), is("Sat Mar 25 01:02:03 CET 2017"));
     }
 

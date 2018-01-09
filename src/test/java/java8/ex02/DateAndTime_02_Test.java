@@ -8,6 +8,8 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.Date;
+import java.util.Formatter;
+import java.util.Locale;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -21,14 +23,14 @@ public class DateAndTime_02_Test {
     public void test_localDate_of() {
 
         // TODO créer un objet LocalDate à la date 24/12/2050
-        LocalDate result = null;
+        LocalDate result = LocalDate.of(2050, Month.DECEMBER, 24);
 
         // TODO valoriser les différentes variables afin de rendre le test passant
-        int year = 0;
-        Month month = null;
-        int dayOfMonth = 0;
-        DayOfWeek dayOfWeek = null;
-        int dayOfYear = 0;
+        int year = result.getYear();
+        Month month = result.getMonth();
+        int dayOfMonth = result.getDayOfMonth();
+        DayOfWeek dayOfWeek = result.getDayOfWeek();
+        int dayOfYear = result.getDayOfYear();
 
         assertThat(year, is(2050));
         assertThat(month, is(Month.DECEMBER));
@@ -42,14 +44,12 @@ public class DateAndTime_02_Test {
 
         // TODO créer un objet LocalDate à la date 10/01/1990
         // TODO utiliser la méthode parse
-        LocalDate result = null;
-
+        LocalDate result = LocalDate.parse("10/01/1990",DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         // TODO valoriser les différentes variables afin de rendre le test passant
-        int year = 0;
-        Month month = null;
-        int dayOfMonth = 0;
-
+        int year = result.getYear();
+        Month month = result.getMonth();
+        int dayOfMonth = result.getDayOfMonth();
 
         assertThat(year, is(1990));
         assertThat(month, is(Month.JANUARY));
@@ -61,10 +61,10 @@ public class DateAndTime_02_Test {
 
         // TODO créer un objet LocalDate à la date 11/03/2015
         // TODO utiliser la méthode of
-        LocalDate localDate = null;
+        LocalDate localDate = LocalDate.of(2015, Month.MARCH, 11);
 
         // TODO Formatter la date pour que le test soit passant
-        String result = null;
+        String result = localDate.format(DateTimeFormatter.ofPattern("dd - MM - yyyy", Locale.FRANCE));
 
         assertThat(result, is("11 - 03 - 2015"));
     }
@@ -74,10 +74,10 @@ public class DateAndTime_02_Test {
 
         // TODO créer un objet LocalDate à la date 11/03/2015
         // TODO utiliser la méthode of
-        LocalDate localDate = null;
+        LocalDate localDate = LocalDate.of(2015, Month.MARCH, 11);
 
         // TODO Formatter la date pour avoir l'affichage suivant : "11/03/2015 00:00:00"
-        localDate.format(null);
+        localDate.format(DateTimeFormatter.ofPattern("DD/MM/YYYY HH:mm:ss"));
     }
 
     @Test
@@ -85,10 +85,10 @@ public class DateAndTime_02_Test {
 
         // TODO créer un objet LocalDate à la date 10/01/2000
         // TODO utiliser la méthode of
-        LocalDate localDate = null;
+        LocalDate localDate = LocalDate.of(2000, Month.JANUARY, 10);
 
         // TODO transformer la date précédente en 05/02/2015
-        LocalDate result = null;
+        LocalDate result = localDate.withDayOfMonth(5).withMonth(2).withYear(2015);
 
         assertThat(result.getYear(), is(2015));
         assertThat(result.getMonth(), is(Month.FEBRUARY));

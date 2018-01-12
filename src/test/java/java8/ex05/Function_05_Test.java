@@ -21,11 +21,14 @@ public class Function_05_Test {
 
     // TODO compléter la fonction
     // TODO vérifier que l'age > 4 avec une assertion JUnit
-    Consumer<Person> verifyAge = Assert.assertTrue("Age superieur a 4.", p->{return(p.getAge()>4);});
-
+    Consumer<Person> verifyAge = (Person p)->{
+        Assert.assertTrue(p.getAge()>4);
+    };
     // TODO compléter la fonction
     // TODO vérifier que le mot de passe est "secret" avec une assertion JUnit
-    Consumer<Person> verifyPassword = null;
+    Consumer<Person> verifyPassword = (Person personne)->{
+        Assert.assertTrue(personne.getPassword().equals("secret"));
+    }
     //end::functions[]
 
 
@@ -35,7 +38,7 @@ public class Function_05_Test {
 
         // TODO invoquer la méthode personList.forEach pour modifier les mots de passe en "secret"
         // personList.forEach...
-
+        personList.forEach(changePasswordToSecret);
         // TODO remplacer la boucle for par l'invocation de la méthode forEach
         // TODO Utiliser la méthode andThen pour chaîner les vérifications verifyAge et verifyPassword
         // personList.forEach...
